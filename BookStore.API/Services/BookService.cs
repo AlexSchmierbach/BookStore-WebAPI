@@ -13,4 +13,12 @@ public class BookService : IBookService
     public IEnumerable<Book> GetAllBooks() => _books;
 
     public Book? GetBookById(int id) => _books.FirstOrDefault(b => b.Id == id);
+
+    public Book CreateBook(Book book)
+    {
+        book.Id = _books.Max(b => b.Id) + 1;
+        _books.Add(book);
+        
+        return book;
+    }
 }

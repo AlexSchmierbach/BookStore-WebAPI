@@ -1,3 +1,4 @@
+using BookStore.Models;
 using Microsoft.AspNetCore.Mvc;
 using BookStore.Services;
 
@@ -18,5 +19,18 @@ public class BooksController(IBookService bookService) : ControllerBase
         var book = bookService.GetBookById(id);
 
         return book == null ? NotFound() : Ok(book);
+    }
+
+    [HttpPost]
+    public IActionResult CreateBook([FromBody] Book book)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+        
+        var createdBook = bookService.CreateBook(book);
+        
+        return CreatedAtAction(nameof(GetBookById), new { id = createdBook.Id }, createdBook);
     }
 }

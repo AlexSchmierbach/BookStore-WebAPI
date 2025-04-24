@@ -1,19 +1,19 @@
-#BookStore
+# BookStore
 
-##Connected to PostgreSQL
+## Connected to PostgreSQL
 - Uses PostgreSQL as the primary database
 - Connected via Entity Framework Core using Npgsql
 - Configured with a DefaultConnection string in appsettigns.json
 
-##Book Entity (Model)
-###Represents a book with properties:
+## Book Entity (Model)
+### Represents a book with properties:
 - Id (int)
 - Title (string)
 - Author (string)
 - Price (decimal)
 
-##Architecture
-###Clean separation of concerns:
+## Architecture
+### Clean separation of concerns:
 - Models for data structure
 - Services for business logic (IBookService + BookService)
 - Controllers for API routing
@@ -28,7 +28,7 @@ Full Supports Dependency Injection
 |	PUT	|	/api/books/{id}	|	Update an existing book	|
 |	DELETE	|	/api/books/{id}	|	Delete a book	|
 
-Other Features
-Currently tested with Scalar but can be tested with Postman, or any REST client
-Migrations are managed via EF Core
-Easily extensible with DTOs, validations, or authentication layers
+## Other Features
+- Currently tested with Scalar but can be tested with Postman, or any REST client
+- Migrations are managed via EF Core
+- Easily extensible with DTOs, or authentication layers

@@ -17,9 +17,9 @@
 - Models for data structure
 - Services for business logic (IBookService + BookService)
 - Controllers for API routing
-Full Supports Dependency Injection
+- Full Supports Dependency Injection
 
-##API Endpoints
+## API Endpoints
 |	Method	|	Endpoint	|	Description	|
 |	------	|	--------	|	-----------	|
 |	GET	|	/api/books	|	Retrieve all books	|

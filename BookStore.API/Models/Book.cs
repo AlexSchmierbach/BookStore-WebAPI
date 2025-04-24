@@ -4,6 +4,7 @@ namespace BookStore.Models;
 
 public class Book
 {
+    [Key]
     public int Id { get; set; }
     [Required]
     [StringLength(100, ErrorMessage = "Title can't be longer than  100 characters.")]

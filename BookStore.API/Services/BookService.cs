@@ -11,7 +11,6 @@ public class BookService(BookStoreDbContext context) : IBookService
 
     public Book CreateBook(Book book)
     {
-        book.Id = context.Books.Max(b => b.Id) + 1;
         context.Books.Add(book);
         context.SaveChanges();
         

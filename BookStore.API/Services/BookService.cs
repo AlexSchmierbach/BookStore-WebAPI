@@ -1,24 +1,41 @@
+using BookStore.Data;
 using BookStore.Models;
 
 namespace BookStore.Services;
 
-public class BookService : IBookService
+public class BookService(BookStoreDbContext context) : IBookService
 {
-    private readonly List<Book> _books = new()
-    {
-        new Book { Id = 1, Title = "Clean Code", Author = "Robert C. Martin", Price = 29.99m },
-        new Book { Id = 2, Title = "The Pragmatic Programmer", Author = "Andy Hunt", Price = 35.00m }
-    };
-    
-    public IEnumerable<Book> GetAllBooks() => _books;
+    public IEnumerable<Book> GetAllBooks() => context.Books.ToList();
 
-    public Book? GetBookById(int id) => _books.FirstOrDefault(b => b.Id == id);
+    public Book? GetBookById(int id) => context.Books.Find(id);
 
     public Book CreateBook(Book book)
     {
-        book.Id = _books.Max(b => b.Id) + 1;
-        _books.Add(book);
+        book.Id = context.Books.Max(b => b.Id) + 1;
+        context.Books.Add(book);
+        context.SaveChanges();
         
         return book;
+    }
+
+    public Book? UpdateBook(Book book)
+    {
+        var existing = context.Books.Find(book.Id);
+        if (existing is null) return null;
+        
+        existing.Title = book.Title;
+        existing.Author = book.Author;
+        existing.Price = book.Price;
+        
+        context.SaveChanges();
+        return existing;
+    }
+
+    public void DeleteBook(int id)
+    {
+        var book = context.Books.Find(id);
+        if (book is null) return;
+        context.Books.Remove(book);
+        context.SaveChanges();
     }
 }

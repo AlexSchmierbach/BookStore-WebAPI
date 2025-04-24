@@ -6,5 +6,7 @@ public interface IBookService
 {
     IEnumerable<Book> GetAllBooks();
     Book? GetBookById(int id);
-    public Book CreateBook(Book book);
+    Book CreateBook(Book book);
+    Book? UpdateBook(Book book);
+    void DeleteBook(int id);
 }
